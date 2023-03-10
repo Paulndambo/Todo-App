@@ -9,10 +9,16 @@ def index(request):
     "todo_items": todo_items
     })
 
+
 def add_todo(request):
     current_date = timezone.now()
     content = request.POST["content"]
-    created_obj = Todo.objects.create(added_date=current_date, text=content)
+    title = request.POST["title"]
+    created_obj = Todo.objects.create(
+        added_date=current_date, 
+        text=content,
+        title=title
+    )
     print(created_obj)
     print(created_obj.id)
     return HttpResponseRedirect("/")
